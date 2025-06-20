@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Mayorista - VLD</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo-section">
+            <div class="logo">VLD</div>
+            <div class="title-section">
+                <h1>Distribuidora Online</h1>
+            </div>
+        </div>
+
+        <div class="subtitle">COMPRAS MAYORISTAS</div>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar productos..." class="search-input">
+        </div>
+
+        <div class="categories-grid" id="categories">
+            <button class="category-btn active" data-category="todos">
+                <div class="category-icon">🛒</div>
+                <div>TODOS</div>
+            </button>
+            <button class="category-btn" data-category="Almacén">
+                <div class="category-icon">🛒</div>
+                <div>ALMACÉN</div>
+            </button>
+            <button class="category-btn" data-category="Bebidas y Jugos">
+                <div class="category-icon">🍾</div>
+                <div>BEBIDAS Y JUGOS</div>
+            </button>
+            <button class="category-btn" data-category="Congelados">
+                <div class="category-icon">❄️</div>
+                <div>CONGELADOS</div>
+            </button>
+            <button class="category-btn" data-category="Desayuno y Merienda">
+                <div class="category-icon">🍪</div>
+                <div>DESAYUNO Y MERIENDA</div>
+            </button>
+            <button class="category-btn" data-category="Golosinas y Chocolate">
+                <div class="category-icon">🍫</div>
+                <div>GOLOSINAS Y CHOCOLATE</div>
+            </button>
+            <button class="category-btn" data-category="Kiosco y Varios">
+                <div class="category-icon">🏪</div>
+                <div>KIOSCO Y VARIOS</div>
+            </button>
+            <button class="category-btn" data-category="Lácteos">
+                <div class="category-icon">🥛</div>
+                <div>LÁCTEOS</div>
+            </button>
+            <button class="category-btn" data-category="Librería">
+                <div class="category-icon">✏️</div>
+                <div>LIBRERÍA</div>
+            </button>
+            <button class="category-btn" data-category="Limpieza">
+                <div class="category-icon">🧽</div>
+                <div>LIMPIEZA</div>
+            </button>
+            <button class="category-btn" data-category="Perfumería">
+                <div class="category-icon">🧴</div>
+                <div>PERFUMERÍA</div>
+            </button>
+            <button class="category-btn" data-category="Quesos y Fiambres">
+                <div class="category-icon">🧀</div>
+                <div>QUESOS Y FIAMBRES</div>
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="stats" id="stats">
+            <span id="productCount">Cargando productos...</span>
+        </div>
+        <div class="products-grid" id="productsGrid">
+            <div class="loading">Cargando catálogo...</div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
