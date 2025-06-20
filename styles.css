@@ -147,6 +147,7 @@ body {
     flex-grow: 1; /* Added for flex layout */
     overflow-y: auto; /* Added to make container scroll its own content */
     min-height: 0; /* Added to help overflow work with flex-grow */
+    width: 100%; /* Added this line */
 }
 
 .products-grid {
@@ -154,6 +155,7 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1rem;
     margin-top: 1rem; /* Added from first HTML styles */
+    width: 100%; /* Added this line */
 }
 
 .product-card {
