@@ -257,6 +257,11 @@ body {
 
     .products-grid {
         grid-template-columns: 1fr; /* Consistent for mobile */
+        /* Diagnostic Styles */
+        background-color: rgba(255, 0, 0, 0.5);
+        min-height: 300px;
+        border: 2px solid blue;
+        /* ... any other existing .products-grid rules for mobile ... */
     }
 
     .header {
@@ -270,5 +275,10 @@ body {
     .category-btn { /* From first HTML */
         padding: 0.8rem 0.5rem;
         font-size: 0.7rem;
+    }
+
+    /* Diagnostic Style for product cards on mobile */
+    .product-card {
+        border: 2px solid limegreen !important;
     }
 }
