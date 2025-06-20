@@ -13,16 +13,19 @@ body {
     background: linear-gradient(135deg, #4A90E2 0%, #357AE8 100%);
     min-height: 100vh;
     color: #333;
-    overflow-y: auto; /* Added this line */
+    /* overflow-y: auto; /* Original - this might be overridden by flex behavior or moved to .container */
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
     background: #4A90E2;
-    padding: 1rem;
+    padding: 1rem; /* This was mobile padding, general padding might be different or this can be mobile specific */
     box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-    position: sticky;
+    position: sticky; /* Base position is sticky */
     top: 0;
     z-index: 100;
+    flex-shrink: 0; /* Added for flex layout */
 }
 
 .logo-section {
@@ -141,6 +144,9 @@ body {
     padding: 1rem;
     max-width: 1200px;
     margin: 0 auto;
+    flex-grow: 1; /* Added for flex layout */
+    overflow-y: auto; /* Added to make container scroll its own content */
+    min-height: 0; /* Added to help overflow work with flex-grow */
 }
 
 .products-grid {
@@ -266,7 +272,10 @@ body {
     }
 
     .header {
-        display: none; /* Completely hide the header */
+        padding: 0.8rem; /* Existing mobile rule */
+        position: static; /* Ensure it's static for mobile, overriding sticky */
+        /* display: block; /* Or whatever its default is, ensuring it's not 'none' */
+        /* flex-shrink: 0; /* This is already global, but can be mobile specific if needed */
     }
 
     .container {
