@@ -236,43 +236,41 @@ function renderizarProductos(productos) {
         return;
     }
 
-    if (productos.length === 0) {
-        grid.innerHTML = '<div class="no-results">No se encontraron productos</div>';
+    if (!productos || productos.length === 0) { // Added a check for !productos
+        grid.innerHTML = '<div class="no-results">No se encontraron productos o la lista está vacía.</div>';
         return;
     }
 
     grid.innerHTML = productos.map(producto => {
-        // Determine image source or class for background
-        let imageHtml;
-        if (producto.imagen && producto.imagen.startsWith('http')) {
-            imageHtml = `<img src="${producto.imagen}" alt="${producto.nombre}" class="product-image" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x300?text=Imagen+no+disponible';">`;
-        } else if (producto.imagen) { // Assumes it's a class like 'coca', 'agua'
-            // This was from the second HTML, we'll use a generic placeholder for now if no direct URL.
-            // For simplicity, the data structure above now uses Unsplash/placeholder URLs for all.
-            imageHtml = `<img src="https://via.placeholder.com/400x300?text=${producto.nombre}" alt="${producto.nombre}" class="product-image">`;
-        } else {
-            imageHtml = `<img src="https://via.placeholder.com/400x300?text=Imagen+no+disponible" alt="${producto.nombre}" class="product-image">`;
-        }
+        try {
+            let imageHtml;
+            if (producto.imagen && producto.imagen.startsWith('http')) {
+                imageHtml = `<img src="${producto.imagen}" alt="${producto.nombre}" class="product-image" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x300?text=Imagen+no+disponible';">`;
+            } else if (producto.imagen) {
+                imageHtml = `<img src="https://via.placeholder.com/400x300?text=${encodeURIComponent(producto.nombre)}" alt="${producto.nombre}" class="product-image">`;
+            } else {
+                imageHtml = `<img src="https://via.placeholder.com/400x300?text=Imagen+no+disponible" alt="${producto.nombre}" class="product-image">`;
+            }
 
-        // Add product specific image class if it exists (e.g. for coca, agua, etc. for styled placeholders)
-        // This assumes the 'imagen' field might also just be 'coca', 'agua' if no URL.
-        // However, the data above is standardized to use URLs.
-        // The CSS has classes like .product-image.coca - these would apply if the img tag itself had that class.
-        // For now, we'll rely on the src attribute. The CSS classes for specific brands on product-image
-        // won't be hit unless we add them dynamically based on brand/product.
-        // Let's simplify and assume `producto.imagen` is always a URL.
+            // Ensure precio is a number before formatting
+            const precioFormateado = typeof producto.precio === 'number' ? formatearPrecio(producto.precio) : 'Precio no disponible';
 
-        return `
-            <div class="product-card">
-                ${imageHtml}
-                <div class="product-info">
-                    <div class="product-code">${producto.codigo}</div>
-                    <div class="product-name">${producto.nombre}</div>
-                    <div class="product-brand">${producto.marca}</div>
-                    <div class="product-price">${formatearPrecio(producto.precio)}</div>
+            return `
+                <div class="product-card">
+                    ${imageHtml}
+                    <div class="product-info">
+                        <div class="product-code">${producto.codigo || 'N/A'}</div>
+                        <div class="product-name">${producto.nombre || 'Nombre no disponible'}</div>
+                        <div class="product-brand">${producto.marca || 'Marca no disponible'}</div>
+                        <div class="product-price">${precioFormateado}</div>
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        } catch (error) {
+            console.error("Error rendering product:", producto, error);
+            // Return a placeholder or an HTML comment
+            return `<div class="product-card" style="border: 1px solid red; padding: 10px; color: red;">Error al cargar producto: ${producto && producto.codigo ? producto.codigo : 'Desconocido'}</div>`;
+        }
     }).join('');
 }
 
@@ -314,6 +312,13 @@ function filtrarProductos() {
 // Función de inicialización
 function inicializarApp() {
     console.log('Inicializando aplicación...');
+
+    // Log initial product data for debugging
+    if (typeof productosGecom !== 'undefined' && productosGecom !== null) {
+        console.log("Initial products to render:", JSON.stringify(productosGecom.slice(0, 5), null, 2)); // Log first 5 for brevity
+    } else {
+        console.error("productosGecom is not defined or null at inicializarApp");
+    }
 
     renderizarProductos(productosGecom);
     actualizarEstadisticas(productosGecom);
