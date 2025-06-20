@@ -257,15 +257,12 @@ body {
 
     .products-grid {
         grid-template-columns: 1fr; /* Consistent for mobile */
-        /* Diagnostic Styles */
-        background-color: rgba(255, 0, 0, 0.5);
-        min-height: 300px;
-        border: 2px solid blue;
-        /* ... any other existing .products-grid rules for mobile ... */
+        /* Ensure diagnostic styles like background-color, min-height, border are removed here */
     }
 
     .header {
-        padding: 0.8rem; /* Consistent for mobile */
+        padding: 0.8rem; /* Existing rule */
+        position: static; /* Applied change */
     }
 
     .product-info {
@@ -277,8 +274,8 @@ body {
         font-size: 0.7rem;
     }
 
-    /* Diagnostic Style for product cards on mobile */
     .product-card {
-        border: 2px solid limegreen !important;
+        /* Ensure diagnostic border is removed here */
+        /* Keep other product-card styles if any were specific to mobile */
     }
 }
