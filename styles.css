@@ -4,11 +4,16 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #4A90E2 0%, #357AE8 100%);
     min-height: 100vh;
     color: #333;
+    overflow-y: auto; /* Added this line */
 }
 
 .header {
@@ -261,8 +266,12 @@ body {
     }
 
     .header {
-        padding: 0.8rem; /* Existing rule */
-        position: static; /* Applied change */
+        display: none; /* Completely hide the header */
+    }
+
+    .container {
+        padding-top: 1rem; /* Add or ensure top padding if header is gone */
+        /* Keep other existing .container mobile styles if any */
     }
 
     .product-info {
